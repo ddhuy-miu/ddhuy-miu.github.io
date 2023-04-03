@@ -1,3 +1,6 @@
+# User settings
+.idea/
+
 # Logs
 logs
 *.log
