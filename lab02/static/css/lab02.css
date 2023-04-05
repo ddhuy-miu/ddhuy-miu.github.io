@@ -1,0 +1,38 @@
+.pie-background {
+    background: url("/lab02/static/images/silverware.jpg");
+}
+
+.my-title {
+    background: darkgrey;
+    color: darkviolet;
+    font: 30px bolder;
+    text-decoration: underline;
+    margin: 6px auto;
+    padding: 1px;
+}
+
+.comment-block {
+    background: #FFFFA8;
+    margin: 5px auto;
+    width: 95%;
+}
+
+.comment-block p {
+    font-style: italic;
+}
+
+.comment-impression {
+    font-weight: bolder;
+}
+
+.my-hyperlink {
+    color: #ffc107;
+}
+
+.direction-title {
+    font-weight: bolder;
+}
+
+.my-direction ul li {
+    list-style: url("/lab02/static/images/pie_bullet.png");
+}
