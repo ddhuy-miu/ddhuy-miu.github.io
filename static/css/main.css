@@ -5,3 +5,10 @@
 .color-orange {
     color: darkorange;
 }
+
+.drop-caps::first-letter {
+    color: hotpink;
+    font: 150% georgia, serif;
+    float: left;
+    text-shadow: 1px 1px 3px red;
+}
