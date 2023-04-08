@@ -12,7 +12,7 @@
     <title>Huy Dang - CS472 Assignments Index</title>
 </head>
 <body>
-<div class="container bg-dark">
+<div class="container-fluid bg-dark">
     <div id="header" class="container-fluid">
         <div id="banner" class="d-flex bg-light border">
             <div id="profile_picture">
@@ -43,34 +43,99 @@
         </div>
     </div>
     <div id="body" class="container-fluid">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-3 bg-light border">
                     <nav id="left_panel" class="navbar">
                         <ul class="navbar-nav">
                             <li class="nav-item"><a class="nav-link" href="../lab01/index.html">Lab 01</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../lab02/index.html">Lab 02 - About Me</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../lab02/recipe.html">Lab 02 - Cake Recipe</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../lab03/index.html">Lab 03 - Login Page</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../lab04/webform1.html">Lab 03 - Web Form 1</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../lab04/webform2.html">Lab 03 - Web Form 2</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../lab02/index.html">Lab 02 - About Me</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="../lab02/recipe.html">Lab 02 - Cake
+                                Recipe</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../lab03/index.html">Lab 03 - Login Page</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="../lab04/webform1.html">Lab 04 - Web Form
+                                1</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../lab04/webform2.html">Lab 04 - Web Form
+                                2</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div id="main_panel" class="col-9 bg-light border">
-                    <p>
-                        Hi Professor,
-                        <br><br>
-                        I completed the homework for today. It took me about 4 hours, I had some troubles
-                        figuring out how the CSS selectors worked and meaning of most common CSS attributes.
-                        <br><br>
-                        The assignment is completed without any syntax error in the HTML validator report.
-                        <br><br>
-                        I have 2 versions of Lab 01 assignments, one without Bootstrap and one with Boostrap. If it is
-                        not allowed to use Bootstrap in our homework, I will check out the version w/o Bootstrap then.
-                        <br><br>
-                        Thank you for today lesson.
-                    </p>
+                    <div class="container-fluid bg-primary">
+                        <nav class="navbar navbar-expand-lg ">
+                            <span class="">MUM Golden Dome Market::: SRM System</span>
+                            <div class="collapse navbar-collapse">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Products</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Suppliers</a>
+                                    </li>
+                                </ul>
+                                <form class="form-inline my-2 my-lg-0">
+                                    <label class="form-control mr-sm-2">Hello!</label>
+                                    <button class="btn btn-secondary my-2 my-sm-0" type="button">Sign Out</button>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div class="container">
+                        <form action method="POST" onsubmit="return alert('New Product!');">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="product_id">Product Number</label>
+                                        <input type="text" class="form-control" id="product_id" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_name">Name</label>
+                                        <input type="text" class="form-control" id="product_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="number" class="form-control" id="price" value="0.0" min="0.0"
+                                               step="0.1"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity in stock</label>
+                                        <input type="number" class="form-control" id="quantity" value="0" min="0"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="suppliers">Supplier</label>
+                                        <select class="form-control" id="suppliers" name="suppliers" required>
+                                            <option value="" disabled selected>Select a supplier</option>
+                                            <option value="facebook">Facebook</option>
+                                            <option value="amazon">Amazon</option>
+                                            <option value="apple">Apple</option>
+                                            <option value="netflix">Netflix</option>
+                                            <option value="google">Google</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date_supplied">Date supplied</label>
+                                        <input type="date" class="form-control" id="date_supplied" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group float-right">
+                                        <button type="submit" class="btn btn-outline-dark">Reset</button>
+                                        <button type="submit" class="btn btn-outline-danger">Cancel</button>
+                                        <button type="submit" class="btn btn-outline-primary">Add Product</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
