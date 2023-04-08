@@ -1,0 +1,140 @@
+body {
+    background-color: #f3f3f3;
+}
+
+.header-text {
+    border-left: 1px solid black;
+    color: rgba(0, 0, 0, 0.9) !important;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+a.header-menu-item {
+    text-decoration: none;
+}
+
+.menu-link {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.menu-link:hover {
+    color: #069 !important;
+}
+
+.welcome-banner {
+    position: relative;
+    min-height: 180px;
+    padding: 57px 0;
+    background-color: rgb(41, 70, 120);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.welcome-banner-text {
+    color: #fff;
+    font-size: 42px;
+    text-align: center;
+}
+
+.main-container {
+    background-color: #f3f3f3;
+}
+
+.login-container {
+    margin: 0 auto;
+    padding: 40px 15px;
+}
+
+.login-container-left {
+    color: #666;
+    padding: 20px 8%;
+}
+
+.login-container-left h3 {
+    margin: 13px 0;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: bolder;
+    color: inherit;
+
+}
+
+.login-container-right {
+    border-right: 1px solid rgba(151, 151, 151, 0.2);
+    padding: 20px 8%;
+}
+
+.login-container-right-heading {
+    color: #333;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.login-container-right-text {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.azure-button {
+    min-height: 50px;
+    background-image: url('https://d12tly1s0ox52d.cloudfront.net/static/060423113549/support_center/images/azure%20ad.png');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    height: 50px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    border: solid 1px #dedede;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.hf-sso_text {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    vertical-align: middle;
+    background: #f3f3f3;
+    margin-top: 0.5rem !important;
+}
+
+.footer {
+    background-color: #e6e6e6;
+    color: #666;
+}
+
+.footer-content {
+    font-size: 13px;
+    padding: 15px 30px;
+}
+
+.footer-copyright-text {
+    margin-left: auto;
+}
+
+.footer-branding {
+    width: 100%;
+    background-color: #FFF;
+    padding: 7px 30px 10px;
+    text-align: right;
+}
+
+.footer-branding span {
+    vertical-align: middle;
+}
+
+.footer-branding-text {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+.footer-branding-link {
+    text-decoration: none;
+    color: #666;
+    font-weight: 700;
+}
