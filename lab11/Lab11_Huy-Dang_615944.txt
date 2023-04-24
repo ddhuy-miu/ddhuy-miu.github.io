@@ -1,0 +1,15 @@
+1. Explain why do we want sometimes to use setImmediate instead of using setTimeout?
+- Both functions are used to execute Javascript code asynchronously. But the main difference between the two is scheduling behavior.
+- `setImmediate` schedules the callback function to be executed immediately after the current iteration of the event loop.
+- `setTimeout` schedules the callback function to be executed after a minimum delay.
+- The `setImmediate` has higher priority than `setTimeout`.
+
+
+2. Explain the difference between process.nextTick and setImmediate?
+- Both functions are used to execute Javascript code asynchronously. But the main difference between the two is scheduling behavior and priorities.
+- `process.nextTick` schedules a callback function to be executed at the earliest opportunity, just before the next iteration of the event loop.
+- `setImmediate` schedules the callback function to be executed immediately after the current iteration of the event loop.
+
+
+3. Does Node.js has window object?
+- Node.js is a server-side JavaScript runtime that runs outside of a web browser environment, and it does not provide a window object.
