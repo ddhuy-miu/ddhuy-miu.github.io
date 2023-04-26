@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <title>WAP - Happy Shopping Mall</title>
+</head>
+<body>
+<div class="container-xxl border border-1">
+    <div id="header" class="container-fluid border border-1 p-0 m-0">
+        <div class="row">
+            <div class="col-2">
+                <div id="logo" class="d-inline-flex p-0 m-0">
+                    <img src="images/logo-happy-shopping.jpg" alt="logo-happy-shopping" class="img-thumbnail p-0 m-0">
+                </div>
+            </div>
+            <div class="col-7 mx-auto my-auto">
+                <div id="banner_text">
+                    <h1 class="text-center">Happy Shopping Mall - WAP CS472</h1>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="container-fluid border border-1">
+                    <form id="user_auth" onsubmit="return false;" class="p-1">
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control form-control-sm" id="loginUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control form-control-sm" id="loginPassword" required>
+                        </div>
+                        <div class="text-center">
+                            <button id="btnLogin" type="submit" class="btn btn-outline-primary">Login</button>
+                        </div>
+                    </form>
+                    <form id="user_info" onsubmit="return false;" class="p-1 d-none">
+                        <div class="mb-3">
+                            <span class="form-label">Welcome, </span>
+                            <span id="userFullName"></span>
+                        </div>
+                        <div class="text-center">
+                            <button id="btnLogout" type="submit" class="btn btn-outline-danger">Logout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="body" class="container border border-1 p-4">
+        <div id="table_product" class="my-1">
+            <h3 class="text-uppercase">PRODUCT LIST</h3>
+            <table class="table table-sm table-responsive table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Preview</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="product_list">
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>$1999.99</td>
+                    <td><img src="images/logo-happy-shopping.jpg" style="max-height: 100px; max-width: 100px;"></td>
+                    <td>10</td>
+                    <td>
+                        <button class="btn btn-outline-warning">
+                            <i class="fa fa-cart-shopping fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>$1999.99</td>
+                    <td><img src="images/logo-happy-shopping.jpg" style="max-height: 100px; max-width: 100px;"></td>
+                    <td>10</td>
+                    <td>
+                        <button class="btn btn-outline-warning">
+                            <i class="fa fa-cart-shopping fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>$1999.99</td>
+                    <td><img src="images/logo-happy-shopping.jpg" style="max-height: 100px; max-width: 100px;"></td>
+                    <td>10</td>
+                    <td>
+                        <button class="btn btn-outline-warning">
+                            <i class="fa fa-cart-shopping fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>$1999.99</td>
+                    <td><img src="images/logo-happy-shopping.jpg" style="max-height: 100px; max-width: 100px;"></td>
+                    <td>10</td>
+                    <td>
+                        <button class="btn btn-outline-warning">
+                            <i class="fa fa-cart-shopping fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div id="table_cart" class="my-1">
+            <h3 class="text-uppercase">YOUR SHOPPING CART</h3>
+            <table class="table table-sm table-responsive table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Sub Total</th>
+                </tr>
+                </thead>
+                <tbody id="cart_list">
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>
+                        <div class="form-group input-group-xs">
+                            <input type="number" min="1" value="1" class="form-control form-control-sm">
+                        </div>
+                    </td>
+                    <td>$1999.99</td>
+                    <td>$1999.99</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NVIDIA Jetson AGX Xavier Module</td>
+                    <td>
+                        <div class="form-group input-group-xs">
+                            <input type="number" min="0" value="1" class="form-control form-control-sm">
+                        </div>
+                    </td>
+                    <td>$1999.99</td>
+                    <td>$1999.99</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: center;">
+                        <span class="text-uppercase">Total price: </span>
+                        <span id="total_price">$1999.99</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="text-center">
+                            <button id="btnCheckout" type="submit" class="btn btn-outline-success">Place Order</button>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

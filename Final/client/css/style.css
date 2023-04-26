@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#logo {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#banner {
+}
+
+#banner_text {
+    font-size: xx-large;
+}
+
+.input-group-xs > .form-control {
+    width: 60px;
+    padding: 1px 5px;
+    line-height: 1.5;
+    text-align: center;
+}
