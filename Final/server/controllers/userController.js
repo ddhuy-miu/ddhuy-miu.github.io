@@ -58,11 +58,11 @@ exports.login = (request, response, next) => {
 
 exports.logout = (request, response, next) => {
     let username = request.body.username;
-    let token =  request.body.token;
+    let token = request.body.token;
     console.log(`User logout: ${token}`);
 
     if (!dbTokens.hasOwnProperty(username))
-        return response.status(401).json({message: 'Wrong username or password!'});
+        return response.status(200).json({message: 'Because we have no DB to save Login sessions. Workaround when server is restarted!'});
 
     let user = dbTokens[username];
     if (user.token !== token)

@@ -1,10 +1,9 @@
 const Cart = require('../models/cart');
 const Product = require("../models/product");
 
-let dbCarts = {};
-
 exports.checkout = (request, response, next) => {
     let token = request.header('Authorization');
+    let username = token.split('-')[0];
     console.log('Checkout Cart', token);
 
     // TODO: authentication
@@ -24,12 +23,13 @@ exports.checkout = (request, response, next) => {
         let product = Product.find(item.id);
         product.stock = product.stock - item.count;
     }
-    delete dbCarts[token];
+    Cart.removeCart(username);
     return response.status(200).json({});
 }
 
 exports.get = (request, response, next) => {
     let token = request.header('Authorization');
+    let username = token.split('-')[0];
     console.log('Get Cart', token);
 
     // TODO: authentication
@@ -37,7 +37,7 @@ exports.get = (request, response, next) => {
     // TODO: authorization
 
     // TODO: handle request
-    let cart = dbCarts[token];
+    let cart = Cart.find(username);
     if (cart) {
         return response.status(200).json(cart.items);
     }
@@ -45,6 +45,7 @@ exports.get = (request, response, next) => {
 
 exports.create = (request, response, next) => {
     let token = request.header('Authorization');
+    let username = token.split('-')[0];
     let productId = request.body.product_id;
     console.log('Add item to Cart', token, productId);
 
@@ -53,11 +54,7 @@ exports.create = (request, response, next) => {
     // TODO: authorization
 
     // TODO: handle request
-    let cart = dbCarts[token];
-    if (!cart) {
-        dbCarts[token] = cart = Cart.create(token);
-    }
-
+    let cart =  Cart.create(username);
     let product = Product.find(productId);
     if (product) {
         cart.addItem(product, 1);

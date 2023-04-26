@@ -50,6 +50,11 @@ class Cart {
             cart = new Cart(username);
         return cart;
     }
+
+    static removeCart(username) {
+        let cart = dbCarts.find(c => c.username === username);
+        cart.emptyCart();
+    }
 }
 
 let dbCarts = [
