@@ -6,10 +6,13 @@ function hideProductTable() {
 
 function showProductTable() {
     console.log('Show product list');
+
     async function getProductListApi() {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
         return await fetch('http://localhost:3000/products', {
             method: 'GET',
             headers: {
+                'Authorization': userInfo['token'],
                 "Content-Type": "application/json"
             }
         });
@@ -21,7 +24,6 @@ function showProductTable() {
         return response.json();
     }).then(function (resp_data) {
         document.getElementById('table_product').classList.remove('d-none');
-
         document.getElementById('product_list').innerHTML = '';
         resp_data.forEach(function (product, i) {
             document.getElementById('product_list').innerHTML += `<tr> \
@@ -33,7 +35,7 @@ function showProductTable() {
                 </td> \
                 <td>${product._stock}</td> \
                 <td> \
-                    <button class="btn btn-outline-warning" id="${product._id}"> \
+                    <button class="btn btn-outline-warning" id="${product._id}" onclick='addCart("${product._id}");'> \
                         <i class="fa fa-cart-shopping fa-lg"></i> \
                     </button> \
                 </td> \
@@ -43,7 +45,6 @@ function showProductTable() {
     }).catch(function (error) {
         console.error(`Could not logout: ${error}`);
     });
-
 }
 
 function hideShoppingCart() {
@@ -58,6 +59,71 @@ function showShoppingCart() {
     document.getElementById('total_price').textContent = '';
     document.getElementById('cart_list').innerHTML = '';
     document.getElementById('table_cart').classList.remove('d-none');
+
+    async function getCartAPI() {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        return await fetch('http://localhost:3000/carts/', {
+            method: 'GET',
+            headers: {
+                'Authorization': userInfo['token'],
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+
+    getCartAPI().then((response) => {
+        if (!response.ok)
+            throw new Error(`HTTP[${response.status}]: ${response.status}`);
+        return response.json();
+    }).then((cartItems) => {
+        let total = 0;
+
+        cartItems.forEach(function (item, i) {
+            let sub_total = item.product._price * item.count;
+            total += sub_total;
+            document.getElementById('cart_list').innerHTML += `<tr>\
+                <td>${i + 1}</td>\
+                <td>${item.product._name}</td>\
+                <td>\
+                <div class="form-group input-group-xs">\
+                <input type="number" min="0" value="${item.count}" class="form-control form-control-sm">\
+                </div>\
+                </td>\
+                <td>$${item.product._price}</td>\
+                <td>$${sub_total}</td>\
+            </tr>`
+        });
+
+        document.getElementById('total_price').innerText = `$${total}`;
+    }).catch((error) => {
+        console.error(`Could not login: ${error}`);
+    });
+}
+
+function addCart(productId) {
+    console.log(productId);
+
+    async function addCartAPI() {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        return await fetch('http://localhost:3000/carts/', {
+            method: 'POST',
+            headers: {
+                'Authorization': userInfo['token'],
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'product_id': productId}),
+        });
+    }
+
+    addCartAPI().then((response) => {
+        if (!response.ok)
+            throw new Error(`HTTP[${response.status}]: ${response.status}`);
+        return response.json();
+    }).then((resp_data) => {
+        showShoppingCart(resp_data);
+    }).catch((error) => {
+        console.error(`Could not login: ${error}`);
+    });
 }
 
 function toggleUserAuth(userInfo) {
@@ -143,6 +209,7 @@ document.getElementById('btnLogout').addEventListener('click', function (evt) {
         return await fetch('http://localhost:3000/users/logout', {
             method: 'POST',
             headers: {
+                'Authorization': userInfo['token'],
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(login_info),

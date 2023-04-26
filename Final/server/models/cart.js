@@ -12,17 +12,17 @@ class Cart {
         return this._cartItems;
     }
 
-    addItem(itemId, count) {
-        let item = this.items.find(c => c.itemId === itemId);
+    addItem(product, count) {
+        let item = this.items.find(c => c.product.id === product.id);
         if (item) {
             item.count += count;
         } else {
-            this.items.push({itemId: itemId, count: count});
+            this.items.push({product: product, count: count});
         }
     }
 
-    removeItem(itemId, count) {
-        let index = this.items.findIndex(c => c.itemId === itemId);
+    removeItem(product, count) {
+        let index = this.items.findIndex(c => c.product.id === product.id);
         if (index >= 0) {
             let item = this.items[index];
 
