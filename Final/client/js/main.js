@@ -81,14 +81,12 @@ function showShoppingCart() {
         cartItems.forEach(function (item, i) {
             let sub_total = item.product._price * item.count;
             total += sub_total;
-            document.getElementById('cart_list').innerHTML += `<tr>\
+            document.getElementById('cart_list').innerHTML += `<tr class="cart-item" id="cart-item-${item.product._id}">\
                 <td>${i + 1}</td>\
                 <td>${item.product._name}</td>\
-                <td>\
-                <div class="form-group input-group-xs">\
-                <input type="number" min="0" value="${item.count}" class="form-control form-control-sm">\
-                </div>\
-                </td>\
+                <td><div class="form-group input-group-xs">\
+                <input type="number" min="0" max="${item.product._stock}" value="${item.count}" class="form-control form-control-sm">\
+                </div></td>\
                 <td>$${item.product._price}</td>\
                 <td>$${sub_total}</td>\
             </tr>`
@@ -231,4 +229,40 @@ document.getElementById('btnLogout').addEventListener('click', function (evt) {
 
 document.getElementById('btnCheckout').addEventListener('click', function (ev) {
     console.log('Click Checkout');
+
+    let items = [];
+    for (let tr of document.getElementsByClassName('cart-item')) {
+        let tds = tr.getElementsByTagName('td');
+        let product_id = tr.getAttribute('id').split('-')[2];
+        let product_name = tds[1].innerText;
+
+        let inputs = tds[2].getElementsByTagName('input');
+        let count = inputs[0].value;
+
+        console.log(product_id, product_name, count);
+        items.push({id: product_id, name: product_name, count: count});
+    }
+
+    async function checkoutCartAPI() {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        return await fetch('http://localhost:3000/carts/checkout', {
+            method: 'POST',
+            headers: {
+                'Authorization': userInfo['token'],
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'items': items}),
+        });
+    }
+
+    checkoutCartAPI().then((response) => {
+        if (!response.ok)
+            throw new Error(`HTTP[${response.status}]: ${response.status}`);
+        return response.json();
+    }).then((resp_data) => {
+        showShoppingCart(resp_data);
+        showProductTable()
+    }).catch((error) => {
+        console.error(`Could not login: ${error}`);
+    });
 });
