@@ -1,26 +1,3 @@
-const EVT_LOGIN_OK = 'UserLogInOK';
-const EVT_LOGIN_FAIL = 'UserLogInFail';
-const EVT_LOGOUT_OK = 'UserLogOutOK';
-const EVT_LOGOUT_FAIL = 'UserLogOutFail';
-
-const evtLogInFail = new CustomEvent('', {detail: {}, bubbles: true, cancelable: true, composed: false});
-const evtLogOutOK = new CustomEvent('', {detail: {}, bubbles: true, cancelable: true, composed: false});
-const evtLogOutFail = new CustomEvent('', {detail: {}, bubbles: true, cancelable: true, composed: false});
-
-document.getElementById('user_auth').addEventListener('UserLogInOk', function (evt) {
-    const data = evt.detail;
-
-    console.log('Login Successfully', data);
-    toggleUserAuth(data);
-
-    console.log('Get product list');
-    showProductTable();
-
-    console.log('Get cart');
-    showShoppingCart();
-});
-
-
 function hideProductTable() {
     console.log('Hide product list');
     document.getElementById('product_list').innerHTML = '';
@@ -97,19 +74,15 @@ document.getElementById('btnLogin').addEventListener('click', function (evt) {
             throw new Error(`HTTP[${response.status}]: ${response.status}`);
         return response.json();
     }).then((resp_data) => {
-        document.dispatchEvent(new CustomEvent(EVT_LOGIN_OK, {
-            detail: resp_data,
-            bubbles: true,
-            cancelable: true,
-            composed: false
-        }));
+        console.log('Login Successfully', resp_data);
+        toggleUserAuth(resp_data);
+
+        console.log('Get product list');
+        showProductTable();
+
+        console.log('Get cart');
+        showShoppingCart();
     }).catch((error) => {
-        document.dispatchEvent(new CustomEvent(EVT_LOGIN_FAIL, {
-            detail: error,
-            bubbles: true,
-            cancelable: true,
-            composed: false
-        }));
         console.error(`Could not login: ${error}`);
     });
 });
