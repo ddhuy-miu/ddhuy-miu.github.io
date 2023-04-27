@@ -68,6 +68,26 @@ class User {
         }
         return u;
     }
+
+    static verifyToken(token) {
+        if (!dbTokens.hasOwnProperty(token))
+            return null;
+        return dbTokens[token];
+    }
+
+    login() {
+        const currentDate = new Date();
+        const timestamp = currentDate.getTime();
+        this.token = `${this.username}-${timestamp}`;
+
+        dbTokens[this.token] = this;
+        console.log(dbTokens);
+    }
+
+    logout() {
+        delete dbTokens[this.token];
+        console.log(dbTokens);
+    }
 }
 
 let dbUsers = [
@@ -79,6 +99,8 @@ let dbPasswords = dbUsers.reduce(function (passwdMap, user) {
     passwdMap[user.username] = user.username;
     return passwdMap;
 }, {});
+
+let dbTokens = {};
 
 // User.prototype.toJSON = function () {
 //     let obj = this.toObject();

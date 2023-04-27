@@ -1,16 +1,19 @@
 const Cart = require('../models/cart');
 const Product = require("../models/product");
+const User = require("../models/user");
 
 exports.checkout = (request, response, next) => {
-    let token = request.header('Authorization');
-    let username = token.split('-')[0];
-    console.log('Checkout Cart', token);
-
     // TODO: authentication
+    let token = request.header('Authorization');
+    if (!User.verifyToken(token))
+        return response.redirect('/users/login');
 
     // TODO: authorization
 
     // TODO: handle request
+    let username = token.split('-')[0];
+    console.log('Checkout Cart', token);
+
     let items = request.body.items;
     for (let item of items) {
         let product = Product.find(item.id);
