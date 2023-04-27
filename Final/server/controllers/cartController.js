@@ -31,13 +31,12 @@ exports.checkout = (request, response, next) => {
 }
 
 exports.get = (request, response, next) => {
-    console.log('Get Cart', token);
-
     // TODO: authentication
     let token = request.header('Authorization');
     let user = User.verifyToken(token);
     if (!user)
         return response.status(403).json({message: 'Your need to login or the provided Token is invalid!'});
+    console.log('Get Cart', token);
 
     // TODO: authorization
 
