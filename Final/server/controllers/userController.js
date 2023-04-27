@@ -52,7 +52,7 @@ exports.logout = (request, response, next) => {
 
     let user = User.verifyToken(token);
     if (!user)
-        return response.status(403).json({message: 'Wrong token!'});
+        return response.status(403).json({message: 'Your need to login or the provided Token is invalid!'});
 
     user.logout();
     return response.status(200).json({});
