@@ -1,3 +1,16 @@
+function updateSubTotal(cartItemId, price) {
+    let quantityDOM = document.getElementById('cart-item-quantity-' + cartItemId);
+    let subTotalDOM = document.getElementById('cart-item-total-' + cartItemId);
+    let totalDOM = document.getElementById('total_price');
+
+    let oldSubTotal = parseInt(subTotalDOM.innerText.replace('$', ''));
+    let oldTotal = parseInt(totalDOM.innerText.replace('$', ''));
+
+    subTotalDOM.innerText = `$${quantityDOM.value * price}`;
+
+    totalDOM.innerText = `$${oldTotal - oldSubTotal + quantityDOM.value * price}`;
+}
+
 function hideProductTable() {
     console.log('Hide product list');
     document.getElementById('product_list').innerHTML = '';
@@ -7,9 +20,9 @@ function hideProductTable() {
 function showProductTable() {
     console.log('Show product list');
 
-    async function getProductListApi() {
+    function getProductListApi() {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        return await fetch('http://localhost:3000/products', {
+        return fetch('http://localhost:3000/products', {
             method: 'GET',
             headers: {
                 'Authorization': userInfo['token'],
@@ -60,9 +73,9 @@ function showShoppingCart() {
     document.getElementById('cart_list').innerHTML = '';
     document.getElementById('table_cart').classList.remove('d-none');
 
-    async function getCartAPI() {
+    function getCartAPI() {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        return await fetch('http://localhost:3000/carts/', {
+        return fetch('http://localhost:3000/carts/', {
             method: 'GET',
             headers: {
                 'Authorization': userInfo['token'],
@@ -85,10 +98,13 @@ function showShoppingCart() {
                 <td>${i + 1}</td>\
                 <td>${item.product._name}</td>\
                 <td><div class="form-group input-group-xs">\
-                <input type="number" min="0" max="${item.product._stock}" value="${item.count}" class="form-control form-control-sm">\
+                <input type="number" min="0" max="${item.product._stock}" value="${item.count}" \
+                        id="cart-item-quantity-${item.product._id}"\
+                        onchange='updateSubTotal("${item.product._id}", ${item.product._price})'\
+                        class="form-control form-control-sm">\
                 </div></td>\
                 <td>$${item.product._price}</td>\
-                <td>$${sub_total}</td>\
+                <td id="cart-item-total-${item.product._id}">$${sub_total}</td>\
             </tr>`
         });
 
@@ -101,9 +117,9 @@ function showShoppingCart() {
 function addCart(productId) {
     console.log(productId);
 
-    async function addCartAPI() {
+    function addCartAPI() {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        return await fetch('http://localhost:3000/carts/', {
+        return fetch('http://localhost:3000/carts/', {
             method: 'POST',
             headers: {
                 'Authorization': userInfo['token'],
@@ -160,13 +176,13 @@ document.addEventListener("DOMContentLoaded", function (evt) {
 document.getElementById('btnLogin').addEventListener('click', function (evt) {
     console.log('Login');
 
-    async function loginAPI() {
+    function loginAPI() {
         let login_info = {
             username: document.getElementById('loginUsername').value,
             password: document.getElementById('loginPassword').value
         };
 
-        return await fetch('http://localhost:3000/users/login', {
+        return fetch('http://localhost:3000/users/login', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -196,7 +212,7 @@ document.getElementById('btnLogin').addEventListener('click', function (evt) {
 document.getElementById('btnLogout').addEventListener('click', function (evt) {
     console.log('Logout');
 
-    async function logoutAPI() {
+    function logoutAPI() {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
         let login_info = {
@@ -204,7 +220,7 @@ document.getElementById('btnLogout').addEventListener('click', function (evt) {
             token: userInfo['token']
         };
 
-        return await fetch('http://localhost:3000/users/logout', {
+        return fetch('http://localhost:3000/users/logout', {
             method: 'POST',
             headers: {
                 'Authorization': userInfo['token'],
@@ -243,9 +259,9 @@ document.getElementById('btnCheckout').addEventListener('click', function (ev) {
         items.push({id: product_id, name: product_name, count: count});
     }
 
-    async function checkoutCartAPI() {
+    function checkoutCartAPI() {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        return await fetch('http://localhost:3000/carts/checkout', {
+        return fetch('http://localhost:3000/carts/checkout', {
             method: 'POST',
             headers: {
                 'Authorization': userInfo['token'],
